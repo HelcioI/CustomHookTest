@@ -47,8 +47,8 @@ const Login = (): ReactNode => {
           keyboardType="visible-password"
           secureTextEntry={!showPassword}
         />
-        <Input.LeftIcon name="lock" color="#6c6b6f" size={20}/>
-        <Input.RightIcon onPress={onToggleShowPassword} name="eye" color="#6c6b6f" size={20}/>
+        <Input.LeftIcon name={"lock"} color="#6c6b6f" size={20}/>
+        <Input.RightIcon onPress={onToggleShowPassword} name={showPassword ? "eye-slash" : "eye"} color="#6c6b6f" size={20}/>
       </Input.Root>
 
       <Button
