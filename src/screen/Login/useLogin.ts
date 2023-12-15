@@ -29,10 +29,6 @@ const useLogin = () => {
     console.log({email, password})
   }
 
-  const onToggleDisable = () => {
-    setIsDisable(state => !state)
-  }
-
   const onEmailChangeText = (text: string) => {
     setEmail(text)
   }
@@ -54,7 +50,6 @@ const useLogin = () => {
     handleLogin, 
     isDisable, 
     showPassword,
-    onToggleDisable,
     onToggleShowPassword
   }
 }
