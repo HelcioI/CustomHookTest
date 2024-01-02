@@ -1,19 +1,24 @@
-import { Text, View, ActivityIndicator } from "react-native";
-import { withResource } from "../hoc/withResource";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { UserCardTemplate } from "./UserCardTemplate";
 
-interface UserCardProps {
-  data?: {
-    name: string;
-    id: string;
-  };
-}
+export const UserCard = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState(null);
 
-const UserCard = ({ data }: UserCardProps) => {
-    <View>
-      <Text>Name: {data.name}</Text>
-      <Text>id: {data.id}</Text>
-    </View>
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+      const response = await axios.get("/user/123");
+      setData(response.data);
+      setIsLoading(false);
+    })();
+  });
+  return (
+    <UserCardTemplate
+      name={data.name}
+      id={data.id}
+      isLoading={isLoading}
+    />
   );
 };
-
-export default withResource(UserCard, "/user/123");

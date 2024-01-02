@@ -1,24 +1,27 @@
-import { Text, View, ActivityIndicator } from "react-native";
-import { withResource } from "../hoc/withResource";
+import { useEffect, useState } from "react";
+import { CarCardTemplate } from "./CarCardTemplate";
+import axios from "axios"
 
-interface CarCardProps {
-  data?: {
-    model: string;
-    brand: string;
-    seats: number;
-    id: string;
-  };
-}
+export const CarCard = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [data, setData] = useState(null);
 
-const CarCard = ({ data }: CarCardProps) => {
-  return (
-    <View>
-      <Text>Model: {data.model}</Text>
-      <Text>Brand: {data.brand}</Text>
-      <Text>Seats: {data.seats}</Text>
-      <Text>Name: {data.id}</Text>
-    </View>
-  );
+    useEffect(() => {
+        (async () => {
+            setIsLoading(true);
+            const response = await axios.get("/user/123");
+            setData(response.data);
+            setIsLoading(false);
+        })();
+    });
+
+    return (
+        <CarCardTemplate
+            model={data?.model}
+            brand={data?.brand}
+            seats={data?.seats}
+            id={data?.id}
+            isLoading={isLoading}
+        />
+    );
 };
-
-export default withResource(CarCard, "/car/123");
