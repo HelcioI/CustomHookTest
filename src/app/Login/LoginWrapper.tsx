@@ -17,8 +17,6 @@ const LoginWrapper= (): ReactNode => {
   const [showPassword, setShowPassword] = useState(false);
   const [isDisable, setIsDisable] = useState(true);
   const [inputError, setInputError] = useState({emailError: '', passwordError: ''});
-  const emailRef = useRef<TextInput>(null);
-  const passwordRef = useRef<TextInput>(null);
 
   useEffect(() => {
     if(isValidEmail(email) && isPasswordValid(password)){
@@ -65,24 +63,23 @@ const LoginWrapper= (): ReactNode => {
 
   return (
     <Login 
-    title={LOGIN_CONSTANTS.TITLE}
-    emailPlaceholder={LOGIN_CONSTANTS.EMAIL}
-    passwordPlaceholder={LOGIN_CONSTANTS.PASSWORDS}
-    buttonLabel={LOGIN_CONSTANTS.BUTTON_LABEL}
-    {...{
-      email,
-      password,
-      showPassword,
-      onEmailChangeText,
-      onPasswordChangeText,
-      onToggleShowPassword,
-      handleLogin,
-      isDisable,
-      inputError,
-      validateInput,
-      emailRef,
-      passwordRef
-    }}/>
+      title={LOGIN_CONSTANTS.TITLE}
+      emailPlaceholder={LOGIN_CONSTANTS.EMAIL}
+      passwordPlaceholder={LOGIN_CONSTANTS.PASSWORDS}
+      buttonLabel={LOGIN_CONSTANTS.BUTTON_LABEL}
+      {...{
+        email,
+        password,
+        showPassword,
+        onEmailChangeText,
+        onPasswordChangeText,
+        onToggleShowPassword,
+        handleLogin,
+        isDisable,
+        inputError,
+        validateInput,
+      }}
+    />
   )
 }
 

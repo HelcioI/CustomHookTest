@@ -1,11 +1,11 @@
 import { View, Text } from "react-native";
 import Button from "../../components/Button/Button";
 import { Input } from "../../components/Input/Input";
-import { ReactNode } from "react";
+import { ReactNode, useRef } from "react";
 import { createStyles } from "./styles";
 import { TextInput } from "react-native-gesture-handler";
 
-interface LoginProps {
+export interface LoginProps {
   email: string;
   password: string;
   title: string;
@@ -22,8 +22,11 @@ interface LoginProps {
     passwordError: string;
   };
   validateInput: (value: string, type: string, callback?: () => void) => void;
-  emailRef: React.RefObject<TextInput>;
   buttonLabel: string;
+}
+
+export interface LoginRefs {
+  emailRef: React.RefObject<TextInput>;
   passwordRef: React.RefObject<TextInput>;
 }
 
@@ -41,11 +44,10 @@ const Login = ({
   isDisable,
   inputError,
   validateInput,
-  emailRef,
   buttonLabel,
-  passwordRef
 }: LoginProps): ReactNode => {
   const styles = createStyles();
+  const passwordRef = useRef<TextInput>(null)
 
   return (
     <View style={styles.container}>
@@ -53,7 +55,6 @@ const Login = ({
       <Input.Root>
         <Input.Content
           testID="Email"
-          ref={emailRef}
           value={email}
           onChangeText={onEmailChangeText}
           placeholder={emailPlaceholder}
