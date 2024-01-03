@@ -5,7 +5,7 @@ import React from 'react';
 export default function Home() {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Link href="/Login/Login" asChild>
+        <Link href="/Login/LoginWrapper" asChild>
           <Pressable style={{
               borderWidth: 1, 
               paddingVertical: 16,

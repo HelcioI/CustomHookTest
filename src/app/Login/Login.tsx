@@ -1,44 +1,62 @@
 import { View, Text } from "react-native";
-import useLogin from "./useLogin";
 import Button from "../../components/Button/Button";
 import { Input } from "../../components/Input/Input";
 import { ReactNode } from "react";
+import { createStyles } from "./styles";
+import { TextInput } from "react-native-gesture-handler";
 
-export const LOGIN_CONSTANTS = {
-  TITLE: 'DEV SYNC',
-  EMAIL: 'Email',
-  PASSWORDS: 'Password',
-  BUTTON_LABEL: 'Button',
-  TEST: 'TEST REF'
-};
+interface LoginProps {
+  email: string;
+  password: string;
+  title: string;
+  emailPlaceholder: string;
+  passwordPlaceholder: string;
+  showPassword: boolean;
+  onEmailChangeText: (text: string) => void;
+  onPasswordChangeText: (text: string) => void;
+  onToggleShowPassword: () => void;
+  handleLogin: () => void;
+  isDisable: boolean;
+  inputError: {
+    emailError: string;
+    passwordError: string;
+  };
+  validateInput: (value: string, type: string, callback?: () => void) => void;
+  emailRef: React.RefObject<TextInput>;
+  buttonLabel: string;
+  passwordRef: React.RefObject<TextInput>;
+}
 
-const Login = (): ReactNode => {
-  const {
-    styles,
-    email, 
-    onEmailChangeText, 
-    password, 
-    onPasswordChangeText, 
-    handleLogin,
-    showPassword,
-    isDisable,
-    onToggleShowPassword,
-    emailRef,
-    passwordRef,
-    validateInput,
-    inputError,
-  } = useLogin();
+const Login = ({
+  email,
+  password,
+  title,
+  emailPlaceholder,
+  passwordPlaceholder,
+  showPassword,
+  onEmailChangeText,
+  onPasswordChangeText,
+  onToggleShowPassword,
+  handleLogin,
+  isDisable,
+  inputError,
+  validateInput,
+  emailRef,
+  buttonLabel,
+  passwordRef
+}: LoginProps): ReactNode => {
+  const styles = createStyles();
 
   return (
     <View style={styles.container}>
-      <Text testID="Title" style={styles.title}>{LOGIN_CONSTANTS.TITLE}</Text>
+      <Text testID="Title" style={styles.title}>{title}</Text>
       <Input.Root>
         <Input.Content
           testID="Email"
           ref={emailRef}
           value={email}
           onChangeText={onEmailChangeText}
-          placeholder={LOGIN_CONSTANTS.EMAIL}
+          placeholder={emailPlaceholder}
           placeholderTextColor={'#6c6b6f'}
           error={inputError.emailError}
           keyboardType="email-address"
@@ -56,7 +74,7 @@ const Login = (): ReactNode => {
           ref={passwordRef}
           value={password}
           onChangeText={onPasswordChangeText} 
-          placeholder={LOGIN_CONSTANTS.PASSWORDS}
+          placeholder={passwordPlaceholder}
           placeholderTextColor={'#6c6b6f'}
           error={inputError.passwordError}
           keyboardType="visible-password"
@@ -77,7 +95,7 @@ const Login = (): ReactNode => {
 
       <Button
         testID="Button"
-        label={LOGIN_CONSTANTS.BUTTON_LABEL}
+        label={buttonLabel}
         onPress={handleLogin}
         {...{isDisable}}
       />
