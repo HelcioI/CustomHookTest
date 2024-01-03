@@ -1,12 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createStyles } from "./styles";
+import { TextInput } from "react-native";
 
 const useLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isDisable, setIsDisable] = useState(true);
+  const [inputError, setInputError] = useState({emailError: '', passwordError: ''});
   const styles = createStyles();
+
+  const emailRef = useRef<TextInput>(null);
+  const passwordRef = useRef<TextInput>(null);
+
 
   useEffect(() => {
     if(isValidEmail(email) && isPasswordValid(password)){
@@ -23,6 +29,25 @@ const useLogin = () => {
 
   const isPasswordValid = (password: string) => {
     return password.length >= 8;
+  }
+
+  const validateInput = (text: string, type: "email" | "password", callback?: () => void) => {
+    if(type === 'email') {
+      if(isValidEmail(text)) {
+        setInputError({emailError: '', passwordError: ''});
+        callback?.();
+      } else {
+        setInputError(state => ({...state, emailError: 'Invalid email'}));
+      }
+    }
+    if(type === 'password') {
+      if(isPasswordValid(text)) {
+        setInputError({emailError: '', passwordError: ''});
+        callback?.();
+      } else {
+        setInputError(state => ({...state, passwordError:'Password must be at least 8 characters'}));
+      }
+    }
   }
 
   const handleLogin = () => {
@@ -50,7 +75,11 @@ const useLogin = () => {
     handleLogin, 
     isDisable, 
     showPassword,
-    onToggleShowPassword
+    onToggleShowPassword,
+    emailRef,
+    passwordRef,
+    validateInput,
+    inputError
   }
 }
 

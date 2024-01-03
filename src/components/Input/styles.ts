@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
 
-export const createStyles = () => StyleSheet.create({
+export const createStyles = (isFocus = false, error?: string) =>  StyleSheet.create({
   input: {
     borderWidth: 2, 
-    borderColor: '#170f62',
+    borderColor: isFocus ? '#170f62' : error ? 'red' : '#868484',
     padding: 16,
     paddingLeft: 42,
     borderRadius: 8,

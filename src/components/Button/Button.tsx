@@ -4,14 +4,15 @@ import useButton from "./useButton";
 interface ButtonProps {
   label: string;
   onPress: () => void;
-  isDisable: boolean
+  isDisable?: boolean;
+  testID?: string;
 }
 
-const Button = ({label, onPress, isDisable}: ButtonProps) => {
+const Button = ({label, onPress, testID, isDisable}: ButtonProps) => {
   const {styles} = useButton({isDisable})
   
   return (
-    <TouchableOpacity disabled={isDisable} style={styles.button} {...{onPress}}>
+    <TouchableOpacity disabled={isDisable} style={styles.button} {...{onPress, testID}}>
       <Text style={styles.buttonLabel}>{label}</Text>
     </TouchableOpacity>
   )

@@ -13,11 +13,4 @@ export const createStyles = () => StyleSheet.create({
     marginVertical: 48,
     alignSelf: 'center',
   },
-  input: {
-    borderWidth: 2, 
-    borderColor: '#170f62',
-    padding: 16,
-    margin: 16,
-    borderRadius: 8,
-  }
 })

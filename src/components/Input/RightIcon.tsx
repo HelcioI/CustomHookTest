@@ -7,13 +7,15 @@ interface RightIconProps {
   color: ColorValue,
   size: number,
   onPress: () => void;
+  testID?: string;
+  iconTestID?: string;
 }
 
-export const RightIcon = ({name, color, size, onPress}: RightIconProps) => {
+export const RightIcon = ({name, color, size, onPress, testID, iconTestID}: RightIconProps) => {
   const styles = createStyles();
   return (
-    <TouchableOpacity {...{onPress}} style={styles.rightIcon}>
-      <FontAwesome {...{name, color, size}} />
+    <TouchableOpacity {...{onPress, testID}} style={styles.rightIcon}>
+      <FontAwesome testID={iconTestID} {...{name, color, size}} />
     </TouchableOpacity>
   )
 }

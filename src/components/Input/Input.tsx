@@ -1,4 +1,4 @@
-import { Content } from "./Content";
+import Content from "./Content";
 import { LeftIcon } from "./LeftIcon";
 import { RightIcon } from "./RightIcon";
 import { Root } from "./Root";

@@ -4,11 +4,12 @@ import Button from "../../components/Button/Button";
 import { Input } from "../../components/Input/Input";
 import { ReactNode } from "react";
 
-const LOGIN_CONSTANTS = {
+export const LOGIN_CONSTANTS = {
   TITLE: 'DEV SYNC',
   EMAIL: 'Email',
   PASSWORDS: 'Password',
   BUTTON_LABEL: 'Button',
+  TEST: 'TEST REF'
 };
 
 const Login = (): ReactNode => {
@@ -22,36 +23,60 @@ const Login = (): ReactNode => {
     showPassword,
     isDisable,
     onToggleShowPassword,
+    emailRef,
+    passwordRef,
+    validateInput,
+    inputError,
   } = useLogin();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{LOGIN_CONSTANTS.TITLE}</Text>
+      <Text testID="Title" style={styles.title}>{LOGIN_CONSTANTS.TITLE}</Text>
       <Input.Root>
         <Input.Content
+          testID="Email"
+          ref={emailRef}
           value={email}
           onChangeText={onEmailChangeText}
           placeholder={LOGIN_CONSTANTS.EMAIL}
           placeholderTextColor={'#6c6b6f'}
+          error={inputError.emailError}
           keyboardType="email-address"
+          returnKeyLabel="next"
+          returnKeyType="next"
+          validate={()=> validateInput(email, 'email')}
+          onSubmitEditing={()=> validateInput(email, 'email', () => passwordRef.current?.focus())}
         />
-        <Input.LeftIcon name="envelope-o" color="#6c6b6f" size={20}/>
+        <Input.LeftIcon testID="LeftIcon" name="envelope-o" color="#6c6b6f" size={20}/>
       </Input.Root>
 
       <Input.Root>
         <Input.Content
+          testID="Password"
+          ref={passwordRef}
           value={password}
-          onChangeText={onPasswordChangeText}
+          onChangeText={onPasswordChangeText} 
           placeholder={LOGIN_CONSTANTS.PASSWORDS}
           placeholderTextColor={'#6c6b6f'}
+          error={inputError.passwordError}
           keyboardType="visible-password"
           secureTextEntry={!showPassword}
+          validate={() => validateInput(password, 'password')}
+          onSubmitEditing={() => validateInput(password, 'password', handleLogin)}
         />
-        <Input.LeftIcon name={"lock"} color="#6c6b6f" size={20}/>
-        <Input.RightIcon onPress={onToggleShowPassword} name={showPassword ? "eye-slash" : "eye"} color="#6c6b6f" size={20}/>
+        <Input.LeftIcon testID="LeftIcon" name={"lock"} color="#6c6b6f" size={20}/>
+        <Input.RightIcon 
+          testID={showPassword ? "eye-slash" : "eye"} 
+          iconTestID="Icon" 
+          onPress={onToggleShowPassword} 
+          name={showPassword ? "eye-slash" : "eye"} 
+          color="#6c6b6f" 
+          size={20}
+        />
       </Input.Root>
 
       <Button
+        testID="Button"
         label={LOGIN_CONSTANTS.BUTTON_LABEL}
         onPress={handleLogin}
         {...{isDisable}}
