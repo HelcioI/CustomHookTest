@@ -1,4 +1,4 @@
-import { isPasswordValid, isValidEmail } from "."
+import { isPasswordValid, isValidEmail } from "../src/utils/utils"
 
 describe("utils tests", () => {
   it("should be able to validate a valid email", () => {

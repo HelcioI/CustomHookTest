@@ -1,6 +1,6 @@
-import Login, { LoginProps } from "./Login";
+import Login, { LoginProps } from "../src/app/Login/Login";
 import {RenderAPI, fireEvent, render} from '@testing-library/react-native';
-import { LOGIN_CONSTANTS } from "./LoginWrapper";
+import { LOGIN_CONSTANTS } from "../src/app/Login/LoginWrapper";
 
 const props: LoginProps = {
   title: LOGIN_CONSTANTS.TITLE,

@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import Login from "./Login";
 import { TextInput } from "react-native-gesture-handler";
-import { isPasswordValid, isValidEmail } from "../../utils";
+import { isPasswordValid, isValidEmail } from "../../utils/utils";
 
 export const LOGIN_CONSTANTS = {
   TITLE: 'DEV SYNC',
