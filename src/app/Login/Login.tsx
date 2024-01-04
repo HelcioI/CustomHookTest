@@ -3,6 +3,9 @@ import useLogin from "./useLogin";
 import Button from "../../components/Button/Button";
 import { Input } from "../../components/Input/Input";
 import { ReactNode } from "react";
+import InnerModal from "./InnerModal";
+import OuterModal from "./OuterModal";
+import GlobalModal from "./globalModal";
 
 export const LOGIN_CONSTANTS = {
   TITLE: 'DEV SYNC',
@@ -27,7 +30,12 @@ const Login = (): ReactNode => {
     passwordRef,
     validateInput,
     inputError,
+    openModal,
+    visible,
+    closeModal
   } = useLogin();
+
+  console.log('render Login')
 
   return (
     <View style={styles.container}>
@@ -81,6 +89,12 @@ const Login = (): ReactNode => {
         onPress={handleLogin}
         {...{isDisable}}
       />
+      <Button onPress={openModal} label="Open OuterModal"/>
+      <InnerModal>
+        <Text>InnerModal</Text>
+      </InnerModal>
+      <GlobalModal />
+      <OuterModal {...{visible, closeModal}}/>
     </View>
   )
 }

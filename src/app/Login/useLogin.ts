@@ -8,11 +8,11 @@ const useLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isDisable, setIsDisable] = useState(true);
   const [inputError, setInputError] = useState({emailError: '', passwordError: ''});
+  const [visible, setVisible] = useState(false);
   const styles = createStyles();
 
   const emailRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
-
 
   useEffect(() => {
     if(isValidEmail(email) && isPasswordValid(password)){
@@ -66,6 +66,14 @@ const useLogin = () => {
     setPassword(text)
   }
 
+  const openModal = () => {
+    setVisible(true);
+  }
+  
+  const closeModal = () => {
+    setVisible(false);
+  }
+
   return {
     styles,
     email, 
@@ -79,7 +87,10 @@ const useLogin = () => {
     emailRef,
     passwordRef,
     validateInput,
-    inputError
+    inputError,
+    visible,
+    closeModal,
+    openModal
   }
 }
 

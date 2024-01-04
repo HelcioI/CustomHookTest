@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react-native"
-import useLogin from "./useLogin"
+import useLogin from "../src/app/Login/useLogin"
 
 describe("useLogin Test", () => {
   it('should be disabled if email and password is empty', () => {
