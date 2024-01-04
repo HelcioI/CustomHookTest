@@ -13,4 +13,14 @@ export const createStyles = () => StyleSheet.create({
     marginVertical: 48,
     alignSelf: 'center',
   },
+  leftIcon: {
+    position: 'absolute', 
+    top: 16, 
+    left: 16
+  },
+  rightIcon: {
+    position: 'absolute',
+    right: 16, 
+    top: 16,
+  }
 })

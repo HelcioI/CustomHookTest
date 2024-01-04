@@ -1,4 +1,4 @@
-import Login, { LOGIN_CONSTANTS } from "./Login";
+import Login, { LOGIN_CONSTANTS } from "../src/app/Login/Login";
 import {RenderAPI, fireEvent, render} from '@testing-library/react-native';
 
 const makeSut = ({

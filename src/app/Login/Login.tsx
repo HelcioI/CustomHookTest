@@ -1,8 +1,9 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import useLogin from "./useLogin";
 import Button from "../../components/Button/Button";
-import { Input } from "../../components/Input/Input";
+import  Input  from "../../components/Input/Input";
 import { ReactNode } from "react";
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 export const LOGIN_CONSTANTS = {
   TITLE: 'DEV SYNC',
@@ -32,8 +33,7 @@ const Login = (): ReactNode => {
   return (
     <View style={styles.container}>
       <Text testID="Title" style={styles.title}>{LOGIN_CONSTANTS.TITLE}</Text>
-      <Input.Root>
-        <Input.Content
+        <Input
           testID="Email"
           ref={emailRef}
           value={email}
@@ -46,12 +46,19 @@ const Login = (): ReactNode => {
           returnKeyType="next"
           validate={()=> validateInput(email, 'email')}
           onSubmitEditing={()=> validateInput(email, 'email', () => passwordRef.current?.focus())}
+          leftIcon={
+            <View style={styles.leftIcon}>
+              <FontAwesome
+                testID="LeftIcon" 
+                name="envelope-o" 
+                color="#6c6b6f" 
+                size={20}
+              />
+            </View>
+          }
         />
-        <Input.LeftIcon testID="LeftIcon" name="envelope-o" color="#6c6b6f" size={20}/>
-      </Input.Root>
 
-      <Input.Root>
-        <Input.Content
+        <Input
           testID="Password"
           ref={passwordRef}
           value={password}
@@ -63,17 +70,27 @@ const Login = (): ReactNode => {
           secureTextEntry={!showPassword}
           validate={() => validateInput(password, 'password')}
           onSubmitEditing={() => validateInput(password, 'password', handleLogin)}
+          leftIcon={
+            <View style={styles.leftIcon}>
+              <FontAwesome
+                testID="LeftIcon" 
+                name="lock" 
+                color="#6c6b6f" 
+                size={20}
+              />
+            </View>
+          }
+          rightIcon={   
+            <TouchableOpacity onPress={onToggleShowPassword} style={styles.rightIcon}>
+              <FontAwesome   
+                testID={showPassword ? "eye-slash" : "eye"} 
+                name={showPassword ? "eye-slash" : "eye"} 
+                color="#6c6b6f" 
+                size={20}
+              />
+            </TouchableOpacity>
+          }
         />
-        <Input.LeftIcon testID="LeftIcon" name={"lock"} color="#6c6b6f" size={20}/>
-        <Input.RightIcon 
-          testID={showPassword ? "eye-slash" : "eye"} 
-          iconTestID="Icon" 
-          onPress={onToggleShowPassword} 
-          name={showPassword ? "eye-slash" : "eye"} 
-          color="#6c6b6f" 
-          size={20}
-        />
-      </Input.Root>
 
       <Button
         testID="Button"
